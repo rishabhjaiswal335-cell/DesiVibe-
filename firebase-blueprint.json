@@ -1,0 +1,279 @@
+{
+  "entities": {
+    "PublicProfile": {
+      "title": "PublicProfile",
+      "description": "Publicly visible non-PII creator profile metadata for DesiVibe.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "description": "Firebase Auth UID matching document ID."
+        },
+        "username": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 30,
+          "pattern": "^[a-z0-9._]+$",
+          "description": "Unique lowercase handle."
+        },
+        "fullName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 60,
+          "description": "Display name."
+        },
+        "bio": {
+          "type": "string",
+          "maxLength": 240,
+          "description": "Short creator biography."
+        },
+        "vibeStatus": {
+          "type": "string",
+          "maxLength": 80,
+          "description": "Current DesiVibe status line."
+        },
+        "avatarUrl": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Profile avatar URL."
+        },
+        "isVerified": {
+          "type": "boolean",
+          "description": "Server/Admin verified badge."
+        },
+        "role": {
+          "type": "string",
+          "enum": ["user", "admin", "super_admin"],
+          "description": "Access control role."
+        },
+        "followersCount": {
+          "type": "integer",
+          "description": "Follower count."
+        },
+        "followingCount": {
+          "type": "integer",
+          "description": "Following count."
+        },
+        "postsCount": {
+          "type": "integer",
+          "description": "Published post count."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "uid",
+        "username",
+        "fullName",
+        "bio",
+        "vibeStatus",
+        "avatarUrl",
+        "isVerified",
+        "role",
+        "followersCount",
+        "followingCount",
+        "postsCount",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "PrivateUserInfo": {
+      "title": "PrivateUserInfo",
+      "description": "Isolated PII document accessible strictly to the account owner and Super Admin.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "email": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "phone": {
+          "type": "string",
+          "maxLength": 32
+        },
+        "hasRated": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["uid", "email", "phone", "hasRated", "createdAt", "updatedAt"]
+    },
+    "AppRating": {
+      "title": "AppRating",
+      "description": "Post-signup DesiVibe application rating and user review.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "username": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "rating": {
+          "type": "integer"
+        },
+        "tags": {
+          "type": "array"
+        },
+        "feedback": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["userId", "username", "rating", "tags", "feedback", "createdAt", "updatedAt"]
+    },
+    "FollowRelation": {
+      "title": "FollowRelation",
+      "description": "Social follow relationship, including automatic Super Admin follow on signup.",
+      "type": "object",
+      "properties": {
+        "followerId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "followingId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["accepted", "pending"]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["followerId", "followingId", "status", "createdAt", "updatedAt"]
+    },
+    "AdminRecord": {
+      "title": "AdminRecord",
+      "description": "Trusted Firestore admin registry.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "email": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "role": {
+          "type": "string",
+          "enum": ["admin", "super_admin"]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["uid", "email", "role", "createdAt"]
+    },
+    "Announcement": {
+      "title": "Announcement",
+      "description": "Global platform announcement posted by Super Admin.",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "body": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "bannerType": {
+          "type": "string",
+          "enum": ["info", "warning", "festival"]
+        },
+        "isActive": {
+          "type": "boolean"
+        },
+        "createdBy": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["title", "body", "bannerType", "isActive", "createdBy", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/PublicProfile" },
+      "description": "Public non-PII user profiles."
+    },
+    "/users/{userId}/private/{docId}": {
+      "schema": { "$ref": "#/entities/PrivateUserInfo" },
+      "description": "Owner-only and Admin-accessible isolated PII subcollection."
+    },
+    "/app_ratings/{userId}": {
+      "schema": { "$ref": "#/entities/AppRating" },
+      "description": "One rating document per registered user UID."
+    },
+    "/follows/{followId}": {
+      "schema": { "$ref": "#/entities/FollowRelation" },
+      "description": "Follow relationships including auto-follow of Super Admin."
+    },
+    "/admins/{userId}": {
+      "schema": { "$ref": "#/entities/AdminRecord" },
+      "description": "Trusted RBAC admin registry."
+    },
+    "/announcements/{announcementId}": {
+      "schema": { "$ref": "#/entities/Announcement" },
+      "description": "Active announcements visible to users."
+    }
+  }
+}

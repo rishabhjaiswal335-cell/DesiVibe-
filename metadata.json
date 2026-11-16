@@ -1,0 +1,6 @@
+{
+  "name": "DesiVibe",
+  "description": "DesiVibe – Your People. Your Culture. Your Vibe. Full-stack cross-platform social media ecosystem made by Rishabh Jaiswal.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

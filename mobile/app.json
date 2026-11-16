@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "DesiVibe",
+    "slug": "desivibe",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "desivibe",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#0A0A0F",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.desivibe.app",
+      "infoPlist": {
+        "NSCameraUsageDescription": "DesiVibe uses your camera to capture photos, 24h VibeStories, and VibeReels.",
+        "NSMicrophoneUsageDescription": "DesiVibe uses your microphone for VibeReels video and VibeChat voice notes.",
+        "NSPhotoLibraryUsageDescription": "DesiVibe accesses your gallery to upload posts, stories, and reels."
+      }
+    },
+    "android": {
+      "package": "com.desivibe.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#0A0A0F"
+      },
+      "permissions": ["CAMERA", "RECORD_AUDIO", "READ_MEDIA_IMAGES", "READ_MEDIA_VIDEO"]
+    },
+    "plugins": ["expo-router", "expo-camera", "expo-image-picker", "expo-video", "expo-secure-store"]
+  }
+}
